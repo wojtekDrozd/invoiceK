@@ -8,6 +8,8 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.io.FilenameUtils;
+
 public abstract class InvoiceReader {
 	
 	// this will create Head for single file read
@@ -53,7 +55,7 @@ public abstract class InvoiceReader {
 		
 		return recordList;
 	}
-	
+		
 	// this will create list of invoices from all files read
 	public List<Invoice> createInvoiceList(List<File> fileList) throws ParseException{
 		List<Invoice> invoiceList = new ArrayList<Invoice>();
@@ -61,7 +63,8 @@ public abstract class InvoiceReader {
 			List<String> records = extractRecords(file);
 			Head head = createHead(records);
 			List<Product> productList = createProductList(records);
-			Invoice invoice = new Invoice(head,productList);
+			String invoiceFileName = FilenameUtils.removeExtension(file.getName());
+			Invoice invoice = new Invoice(invoiceFileName, head, productList);
 			invoiceList.add(invoice);
 		}
 		return invoiceList;

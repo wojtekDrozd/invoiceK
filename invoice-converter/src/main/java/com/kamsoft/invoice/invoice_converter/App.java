@@ -8,18 +8,14 @@ public class App
 {
     public static void main( String[] args )
     {
-    	// TODO - rename Reader and product classess
-    	// TODO - write classess for writning xml, writing ini, and product ID Mappers
+    	// TODO - rename Reader and product classes
+    	// TODO - write classes for reading xml, writing ini, and product ID Mappers
         InvoiceReader reader = new CsvInvoiceReader();
         List<File> fileList = reader.readFiles(new File(System.getProperty("user.dir")), "csv");
         try {
 			List<Invoice> invoiceList = reader.createInvoiceList(fileList);
-			// test printout of invoices
-			// TODO - implement toString methods for product and head objects
-			for (Invoice invoice : invoiceList) {
-				System.out.println(invoice.getHead().getDateOfPayment());
-				System.out.println(invoice.getProductList().get(0).getProductName());
-			}
+			InvoiceWriter writer = new XmlInvoiceWriter();
+			writer.writeAll(invoiceList);
 		} catch (ParseException e) {
 			System.out.println("Problem with parsing data - check data format");
 			e.printStackTrace();

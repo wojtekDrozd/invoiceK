@@ -4,13 +4,16 @@ import java.util.List;
 
 public class Invoice {
 	
+	private String invoiceFileName;
 	private Head head;
-	public Invoice(Head head, List<Product> productList) {
+	private List<Product> productList;
+	
+	public Invoice(String invoiceFileName, Head head, List<Product> productList) {
 		super();
+		this.invoiceFileName = invoiceFileName;
 		this.head = head;
 		this.productList = productList;
 	}
-	private List<Product> productList;
 	
 	public List<Product> getProductList() {
 		return productList;
@@ -24,5 +27,13 @@ public class Invoice {
 	}
 	public void setHead(Head head) {
 		this.head = head;
+	}
+	
+	public String getInvoiceFileName() {
+		return invoiceFileName;
+	}
+
+	public void setInvoiceFileName(String invoiceFileName) {
+		this.invoiceFileName = invoiceFileName;
 	}
 }

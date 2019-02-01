@@ -1,0 +1,9 @@
+[sekcja1]
+; komentarz do sekcji 1
+parametr1 = abc
+parametr2 = 451
+
+[sekcja2]
+; inne uwagi i komentarze
+parametr1 = 123
+parametr2 = dfg

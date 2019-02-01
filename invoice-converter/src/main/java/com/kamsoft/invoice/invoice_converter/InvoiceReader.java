@@ -31,10 +31,6 @@ public abstract class InvoiceReader {
 			if(extension.equals(fileExtension))
 			resultList.add(file);
 		}
-
-		for (File file: resultList) {
-			System.out.println(file.getName());
-		}
 		
 		return resultList;
 	}

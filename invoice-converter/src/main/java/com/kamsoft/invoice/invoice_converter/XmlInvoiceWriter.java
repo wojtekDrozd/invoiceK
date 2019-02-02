@@ -34,12 +34,12 @@ public class XmlInvoiceWriter extends InvoiceWriter {
 
 			// date of invoice element
 			Element dateOfInvoice = doc.createElement("data_w");
-			dateOfInvoice.appendChild(doc.createTextNode(invoice.getHead().getDateOfInvoice().toString()));
+			dateOfInvoice.appendChild(doc.createTextNode(dateFormat.format(invoice.getHead().getDateOfInvoice())));
 			head.appendChild(dateOfInvoice);
 
 			// date of payment element
 			Element dateOfPayment = doc.createElement("data_p");
-			dateOfPayment.appendChild(doc.createTextNode(invoice.getHead().getDateOfPayment().toString()));
+			dateOfPayment.appendChild(doc.createTextNode(dateFormat.format(invoice.getHead().getDateOfPayment())));
 			head.appendChild(dateOfPayment);
 
 			// supplier ID element

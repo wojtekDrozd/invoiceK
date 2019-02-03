@@ -53,34 +53,34 @@ public class XmlInvoiceWriter extends InvoiceWriter {
 			head.appendChild(receiverID);
 			
 			// iterate through positions in Invoice
-			for (Product productObj : invoice.getProductList()) {
+			for (Position positionObj : invoice.getPositionsList()) {
 				//product element
 				Element product = doc.createElement("pozycja");
 				rootElement.appendChild(product);
 				
 				// product name element
 				Element productName = doc.createElement("nazwa");
-				productName.appendChild(doc.createTextNode(productObj.getProductName()));
+				productName.appendChild(doc.createTextNode(positionObj.getProductName()));
 				product.appendChild(productName);
 				
 				// productID element
 				Element productID = doc.createElement("towar");
-				productID.appendChild(doc.createTextNode(Integer.toString(productObj.getProductID())));
+				productID.appendChild(doc.createTextNode(Long.toString(positionObj.getProductID())));
 				product.appendChild(productID);
 				
 				// quantity element
 				Element quantity = doc.createElement("ilosc");
-				quantity.appendChild(doc.createTextNode(Integer.toString(productObj.getQuantity())));
+				quantity.appendChild(doc.createTextNode(Integer.toString(positionObj.getQuantity())));
 				product.appendChild(quantity);
 				
 				// net Unit Price element
 				Element netUnitPrice = doc.createElement("netto");
-				netUnitPrice.appendChild(doc.createTextNode(Double.toString(productObj.getNetUnitPrice())));
+				netUnitPrice.appendChild(doc.createTextNode(Double.toString(positionObj.getNetUnitPrice())));
 				product.appendChild(netUnitPrice);
 				
 				// net Unit Price element
 				Element taxVatValue = doc.createElement("vat");
-				taxVatValue.appendChild(doc.createTextNode(Double.toString(productObj.getTaxVatValue())));
+				taxVatValue.appendChild(doc.createTextNode(Double.toString(positionObj.getTaxVatValue())));
 				product.appendChild(taxVatValue);
 			}
 			

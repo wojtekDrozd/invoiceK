@@ -10,8 +10,8 @@ public class IniInvoiceWriter extends InvoiceWriter {
 	@Override
 	public void writeFile(Invoice invoice) {
 		Ini ini = new Ini();
-		int productNumber = 1;
-		String productSectionName = "";
+		int positionNumber = 1;
+		String positionSectionName = "";
 
 		// add head section
 		ini.put("NAGLOWEK", "data_w", dateFormat.format(invoice.getHead().getDateOfInvoice()));
@@ -20,14 +20,14 @@ public class IniInvoiceWriter extends InvoiceWriter {
 		ini.put("NAGLOWEK", "odbiorca", invoice.getHead().getReceiverID());
 
 		// add sections for each product
-		for (Product productObj : invoice.getProductList()) {
-			productSectionName = "POZYCJA NR " + Integer.toString(productNumber);
-			ini.put(productSectionName, "nazwa", productObj.getProductName());
-			ini.put(productSectionName, "towar", productObj.getProductID());
-			ini.put(productSectionName, "ilosc", productObj.getQuantity());
-			ini.put(productSectionName, "netto", productObj.getNetUnitPrice());
-			ini.put(productSectionName, "vat", productObj.getTaxVatValue());
-			productNumber += 1;
+		for (Position positionObj : invoice.getPositionsList()) {
+			positionSectionName = "POZYCJA NR " + Integer.toString(positionNumber);
+			ini.put(positionSectionName, "nazwa", positionObj.getProductName());
+			ini.put(positionSectionName, "towar", positionObj.getProductID());
+			ini.put(positionSectionName, "ilosc", positionObj.getQuantity());
+			ini.put(positionSectionName, "netto", positionObj.getNetUnitPrice());
+			ini.put(positionSectionName, "vat", positionObj.getTaxVatValue());
+			positionNumber += 1;
 		}
 
 		try {

@@ -1,14 +1,14 @@
 package com.kamsoft.invoice.invoice_converter;
 
-public class Product {
+public class Position {
 
 	private String productName;
-	private int productID;
+	private long productID;
 	private int quantity;
 	private double netUnitPrice;
 	private double taxVatValue;
 
-	public Product(String productName, int productID, int quantity, double netUnitPrice, double taxVatValue) {
+	public Position(String productName, long productID, int quantity, double netUnitPrice, double taxVatValue) {
 		super();
 		this.productName = productName;
 		this.productID = productID;
@@ -25,11 +25,11 @@ public class Product {
 		this.productName = productName;
 	}
 
-	public int getProductID() {
+	public long getProductID() {
 		return productID;
 	}
 
-	public void setProductID(int productID) {
+	public void setProductID(long productID) {
 		this.productID = productID;
 	}
 

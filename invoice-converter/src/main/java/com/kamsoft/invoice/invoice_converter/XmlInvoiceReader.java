@@ -51,27 +51,26 @@ public class XmlInvoiceReader extends InvoiceReader {
 		return null;
 	}
 
-	// this needs to be fixed to read next products
 	@Override
-	public List<Product> createProductList(File file)
+	public List<Position> createPositionsList(File file)
 			throws ParseException, ParserConfigurationException, SAXException, IOException {
 		NodeList nList = createNodeList(file, "pozycja");
-		List<Product> productList = new ArrayList<Product>();
+		List<Position> positionsList = new ArrayList<Position>();
 		Node nNode;
 
 		for (int i = 0; i < nList.getLength(); i++) {
 			nNode = nList.item(i);
 			Element eElement = (Element) nNode;
 			String productName = eElement.getElementsByTagName("nazwa").item(0).getTextContent();
-			int productID = Integer.parseInt(eElement.getElementsByTagName("towar").item(0).getTextContent());
+			long productID = Long.parseLong(eElement.getElementsByTagName("towar").item(0).getTextContent());
 			int quantity = Integer.parseInt(eElement.getElementsByTagName("ilosc").item(0).getTextContent());
 			double netUnitPrice = Double.parseDouble(eElement.getElementsByTagName("netto").item(0).getTextContent());
 			double taxVatValue = Double.parseDouble(eElement.getElementsByTagName("vat").item(0).getTextContent());
-			Product product = new Product(productName, productID, quantity, netUnitPrice, taxVatValue);
-			productList.add(product);
+			Position product = new Position(productName, productID, quantity, netUnitPrice, taxVatValue);
+			positionsList.add(product);
 		}
 
-		return productList;
+		return positionsList;
 	}
 
 }

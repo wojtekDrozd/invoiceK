@@ -45,22 +45,22 @@ public class CsvInvoiceReader extends InvoiceReader {
 	}
 
 	// creates productList from list of strings
-	public List<Product> createProductList(File file) throws ParseException {
-		List<Product> productList = new ArrayList<Product>();
+	public List<Position> createPositionsList(File file) throws ParseException {
+		List<Position> positionsList = new ArrayList<Position>();
 		List<String> recordList = extractRecords(file);
 		// for all but first record
 		for (String string : recordList.subList(1, recordList.size())) {
 			String[] splittedRecord = string.split(csvSplitBy);
 			String productName = splittedRecord[0];
-			int productID = Integer.parseInt(splittedRecord[1]);
+			long productID = Long.parseLong(splittedRecord[1]);
 			int quantity = Integer.parseInt(splittedRecord[2]);
 			double netUnitPrice = Double.parseDouble(splittedRecord[3]);
 			double taxVatValue = Double.parseDouble(splittedRecord[4]);
-			Product product = new Product(productName, productID, quantity, netUnitPrice, taxVatValue);
-			productList.add(product);
+			Position position = new Position(productName, productID, quantity, netUnitPrice, taxVatValue);
+			positionsList.add(position);
 		}
 
-		return productList;
+		return positionsList;
 	}
 
 }

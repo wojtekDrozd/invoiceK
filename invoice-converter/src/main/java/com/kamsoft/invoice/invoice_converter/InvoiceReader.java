@@ -20,7 +20,7 @@ public abstract class InvoiceReader {
 			throws ParseException, ParserConfigurationException, SAXException, IOException;
 
 	// this will create list of Products(positions) from single file
-	public abstract List<Product> createProductList(File file)
+	public abstract List<Position> createPositionsList(File file)
 			throws ParseException, ParserConfigurationException, SAXException, IOException;
 
 	// this will list files with chosen extension
@@ -59,10 +59,10 @@ public abstract class InvoiceReader {
 		for (File file : fileList) {
 			// List<String> records = extractRecords(file);
 			Head head = createHead(file);
-			List<Product> productList = createProductList(file);
+			List<Position> positionsList = createPositionsList(file);
 			String invoiceFileName = FilenameUtils.removeExtension(file.getName());
 			if (head != null) {
-				Invoice invoice = new Invoice(invoiceFileName, head, productList);
+				Invoice invoice = new Invoice(invoiceFileName, head, positionsList);
 				invoiceList.add(invoice);
 			}
 		}

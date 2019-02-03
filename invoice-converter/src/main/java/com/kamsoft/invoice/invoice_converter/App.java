@@ -10,10 +10,8 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
 public class App {
+
 	public static void main(String[] args) {
-		// TODO - rename Reader and product classes
-		// TODO - write classes for writing txt and product ID Mappers
-		// TODO - separate try catch for each operation
 
 		try {
 			// read csv files into list of Invoice objects
@@ -21,7 +19,9 @@ public class App {
 			List<File> fileList = reader.readFiles(new File(System.getProperty("user.dir")), "csv");
 			List<Invoice> invoiceList = reader.createInvoiceList(fileList);
 
-			// Map product IDs from csv to xml (supplier to ean)
+			// Map product IDs from csv to xml (supplier to EAN)
+			Mapper mapper = new SuppToEanMapper();
+			mapper.mapProductIDs(invoiceList);
 
 			// write xml files using created list of Invoice objects with mapped product IDs
 			InvoiceWriter writer = new XmlInvoiceWriter();
@@ -32,7 +32,9 @@ public class App {
 			fileList = reader.readFiles(new File(System.getProperty("user.dir")), "xml");
 			invoiceList = reader.createInvoiceList(fileList);
 
-			// Map product IDs from xml to ini (ean to receiver)
+			// Map product IDs from xml to ini (EAN to receiver)
+			mapper = new EanToReceiverMapper();
+			mapper.mapProductIDs(invoiceList);
 
 			// write ini files using list of Invoice objects with mapped productID
 			writer = new IniInvoiceWriter();
@@ -42,13 +44,10 @@ public class App {
 			System.out.println("Problem with parsing data - check data format");
 			e.printStackTrace();
 		} catch (ParserConfigurationException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SAXException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

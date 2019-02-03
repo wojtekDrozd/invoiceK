@@ -6,21 +6,21 @@ public class Invoice {
 
 	private String invoiceFileName;
 	private Head head;
-	private List<Product> productList;
+	private List<Position> positionsList;
 
-	public Invoice(String invoiceFileName, Head head, List<Product> productList) {
+	public Invoice(String invoiceFileName, Head head, List<Position> positionsList) {
 		super();
 		this.invoiceFileName = invoiceFileName;
 		this.head = head;
-		this.productList = productList;
+		this.positionsList = positionsList;
 	}
 
-	public List<Product> getProductList() {
-		return productList;
+	public List<Position> getPositionsList() {
+		return positionsList;
 	}
 
-	public void setProductList(List<Product> productList) {
-		this.productList = productList;
+	public void setPositionsList(List<Position> positionsList) {
+		this.positionsList = positionsList;
 	}
 
 	public Head getHead() {
